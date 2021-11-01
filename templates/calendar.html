@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %} Peri Planner | Calendar {% endblock %}
+{% block content %}
+<!--
+<div class="container">
+  <h1>Calendar</h1>
+  <div class="calendar">
+</div>
+-->
+<div class="container">
+  <div class="calendar light">
+    <div class="calendar_header">
+      <h1 class = "header_title">Welcome Back</h1>
+      <p class="header_copy"> Calendar Plan</p>
+    </div>
+<!--
+    <div class="calendar_plan">
+      <div class="cl_plan">
+        <div class="cl_title">Days</div>
+        <div class="cl_copy">Days</div>
+        <div class="cl_add">
+          <i class="fas fa-plus"></i>
+        </div>
+      </div>
+    </div>
+    <div class="calendar_events">
+      <p class="ce_title">Lessons</p>
+      <ul class="list-group">
+	{% for s in ss %}
+	<li class="list-group-item">
+	  <div class="event_item">
+            <div class="ei_Dot"></div>
+            <div class="ei_Title">{{ key }} {{ value }}</div>
+	  </div>
+	</li>
+	{% endfor %}
+      </ul>
+    </div>
+-->
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Lesson Time</th>
+      <th scope="col">Student Name</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in ss %}
+    <tr>
+      <td>{{ s[0] }}</td>
+      <td>{{ s[1] }}</td>
+      <td><a class="btn btn-primary" href="/user/student/{{ s[2] }}/lessons" role="button">Lesson Logs</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  </div>
+</div>
+
+{% endblock %}

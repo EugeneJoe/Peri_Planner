@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %} Peri Planner | Students {% endblock %}
+{% block content %}
+<!--
+<div class="container">
+-->
+ <h1>Students</h1>
+ <div class="table-responsive">
+   <table class="table table-hover">
+     <tr>
+       <th scope="col">Student Name</th>
+       <th scope="col">Instrument</th>
+       <th scope="col">Add Lesson</th>
+     </tr>
+     <tr>
+<!--
+       <form action="/user/students" method=post id="new_student">
+	 <td><input type="text" placeholder="name" name="nm"></td>
+	 <td><input type="text" placeholder="instrument" name="activity"></td>
+	 <td><input type="submit" value="add new"></td>
+       </form>
+-->
+       <form action="/user/students" method=post id="new_student">
+	 {{ form.hidden_tag() }}
+	 <td>{{ form.name(placeholder="Student's name") }}</td>
+	 <td>{{ form.activity(placeholder="Student's instrument") }}</td>
+	 <td>{{ form.submit(value="Add New") }}</td>
+       </form>
+     </tr>
+     {% for student in students %}
+     <tr>
+       <td>{{ student.first_name }} {{ student.last_name }}</td>
+       <td>{{ student.activity }}</td>
+       <td>
+	 <form action="/user/student/{{student.id}}/lessons" method=post id="lessons">
+<!--
+	   <input type="submit" value="Lesson Logs" name="show-lessons" id="show-lessons">
+	   <input type="hidden" value={{ student.id }} name="id">
+-->
+{{ form2.csrf_token()  }}
+{{ form2.submit(value="Lesson Logs") }}
+{{ form2.std_id(value=student.id) }}
+	 </form>
+       </td>
+     </tr>
+     {% endfor %}
+   </table>
+ </div>
+<!--
+</div>
+-->
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Peri Planner | Lesson Logs {% endblock %}
+{% block content %}
+<!--
+<div class="container">
+-->
+<h1>Lesson Logs</h1>
+<h2>{{ student.first_name }} {{ student.last_name }}</h2>
+<h2>{{ student.activity }}</h2>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <tr>
+      <th scope="col">Lesson Time</th>
+      <th scope="col">Location</th>
+      <th scope="col">Lesson Plan</th>
+      <th scope="col">Lesson Comments</th>
+      <th scope="col">Homework</th>
+      <th scope="col">Action</th>
+    </tr>
+    <tr>
+      <form action="/user/student/lessons/new" method=post id="new lesson">
+	{{ form.csrf_token() }}
+	<td>{{ form.lesson_time(placeholder="yyyy/m/d h:m") }}</td>
+	<td>{{ form.location(placeholder="lesson location") }}</td>
+	<td>{{ form.plan(placeholder="What you plan to cover in the lesson") }}</td>
+	<td>{{ form.comments(placeholder="Comments on how the lesson went") }}</td>
+	<td>{{ form.homework(placeholder="Any homework assigned") }}</td>
+	<td>{{ form.new_lesson() }} {{ form.std_id(value=student.id) }}</td>
+      </form>
+    </tr>
+    {% for lesson in lessons %}
+    <tr>
+      <td>{{ lesson.lesson_time }}</td>
+      <td>{{ lesson.location }}</td>
+      <td>{{ lesson.plan }}</td>
+      <td>{{ lesson.comments }}</td>
+      <td>{{ lesson.homework }}</td>
+      <td>
+	<a class="btn btn-primary" href="/user/student/lessons/{{lesson.id}}/update" role="button">Update</a>
+<!--
+	Button trigger modal
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+	  Update
+	</button>
+
+	 Large modal
+	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<h5 class="modal-title" id="exampleModalLabel">Update lesson log</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	      </div>
+	      <div class="modal-body">
+		<form action="/user/student/lessons/{{lesson.id}}/update" method=post id="update_lesson_log">
+		  {{ updateform.csrf_token() }}
+		  {% set f = updateform.plan.process_data(lesson.plan) %}
+		  {{ updateform.plan() }}
+		  {% if lesson.comments %}
+		  {% set f2 = updateform.comments.process_data(lesson.comments) %}
+		  {{ updateform.comments() }}
+		  {% else %}
+		  {{ updateform.comments(placeholder="Comments on how the lesson went") }}
+		  {% endif %}
+		  {% if lesson.homework %}
+		  {% set f3 = updateform.homework.process_data(lesson.homework) %}
+		  {{ updateform.homework() }}
+		  {% else %}
+		  {{ updateform.homework(placeholder="Any homework assigned") }}
+		  {% endif %}
+		  {{ updateform.lesson_id(value=lesson.id) }}
+	      </div>
+	      <div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<button type="button" class="btn btn-primary">{{ updateform.submit(value="Update") }}</button> 
+	      </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+
+	    <form action="/user/student/lessons" method=post id="update lesson">
+	      <input type="submit" value="update" name="update-lesson" id="update-lesson">
+	      <input type="hidden" value={{ lesson.id }} name="lesson id">
+	    </form>
+
+-->
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}

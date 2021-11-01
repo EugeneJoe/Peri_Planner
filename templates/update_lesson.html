@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Peri Planner | Update Lesson Logs {% endblock %}
+{% block content %}
+<form action="/user/student/lessons/{{lesson_id}}/update" method=post id="update_lesson_log">
+  {{ updateform.csrf_token() }}
+  {{ updateform.lesson_id(value=lesson_id) }}
+<div class="form-group">
+  {{ updateform.lesson_time(class_="form-control", placeholder="Y/m/d H:M") }}
+</div>
+<div class="form-group">
+  {{ updateform.location(class_="form-control", placeholder="Enter location") }}
+</div>
+<div class="form-group">
+  {{ updateform.plan(class_="form-control", placeholder="What you intend to cover?") }}
+</div>
+<div class="form-group">
+  {{ updateform.comments(class_="form-control", placeholder="Comments on how the lesson went") }}
+</div>
+<div class="form-group">
+  {{ updateform.homework(class_="form-control", placeholder="Any homework given") }}
+</div>
+  {{ updateform.submit(value="Update", class_="btn btn-primary") }}
+</div>
+</form>
+{% endblock %}

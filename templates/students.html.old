@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} Peri Planner | Students {% endblock %}
+{% block content %}
+<div class="container">
+  <h1>Students</h1>
+  <div class="students">
+    <form action="/user/students" method=post id="new_student">
+      <div class="std_form">
+	<input type="text" placeholder="name" name="nm">
+	<input type="text" placeholder="instrument" name="activity">
+	<input type="submit" value="add new">
+      </div>
+    </form>
+    <ul>
+      {% for student in students %}
+      <li>
+	<div class="name_box backgrnd">
+	  {{ student.first_name }}
+	  {{ student.last_name }}
+	</div>
+	<div class="activity_box backgrnd">
+	  {{ student.activity }}
+	</div>
+	<div class="lesson backgrnd">
+	  <form action="/user/student/lessons" method=post id="lessons">
+	    <input type="submit" value="Lesson Logs">
+	    <input type="hidden" value={{ student.id }} name="id">
+	  </form>
+	</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

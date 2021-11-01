@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %} Peri Planner | Lesson Logs {% endblock %}
+{% block content %}
+<div class="container">
+  <div class="lessons">
+    <h1>Lesson Logs</h1>
+    <h2>{{ student.fullname }}</h2>
+    <h2>{{ student.activity }}</h2>
+    <ul>
+      {% for lesson in lessons %}
+      <li>
+        <div class="plan_box">
+          {{ lesson.plan }}
+        </div>
+        <div class="description_box">
+          {{ lesson.comments }}
+        </div>
+	<div class="comments_box">
+	  {{ lesson.homework }}
+	</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

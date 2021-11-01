@@ -1,0 +1,35 @@
+/*
+.container {
+    background-color: #ffc299;
+}
+
+table, th, td {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    border-collapse: collapse;
+}
+
+th, td {
+    background-color: #ffc299;
+}
+
+tr:hover {
+    background-color: #D6EEEE;
+}
+*/
+ul {
+    list-style: none;
+}
+/*
+.std_form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+*/
