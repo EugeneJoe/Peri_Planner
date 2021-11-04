@@ -4,8 +4,8 @@ from os import environ
 from datetime import timedelta, datetime
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, HiddenField, DateTimeField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, TextAreaField, HiddenField, DateTimeField, PasswordField
+from wtforms.validators import DataRequired, InputRequired, EqualTo
 
 from models import storage
 from models.student import Student
@@ -15,7 +15,7 @@ from models.log import LessonLog
 
 
 app = Flask(__name__)
-app.secret_key = ""
+app.secret_key = "" #kept hidden
 app.permanent_session_lifetime = timedelta(minutes=20)
 time2 = "%Y-%m-%dT%H:%M:%S.%f"
 # app.jinja_env.trim_blocks = True
@@ -23,6 +23,18 @@ time2 = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 #create forms
+class RegistrationForm(FlaskForm):
+    """Form to collect data to create new user"""
+    first_name = StringField(validators=[DataRequired()])
+    last_name = StringField(validators=[DataRequired()])
+    activity = StringField(validators=[DataRequired()])
+    email = StringField(validators=[InputRequired("Please enter your email address")])
+    password = PasswordField(validators=[InputRequired("Please enter your password"),
+                                         EqualTo('confirm', message='Passwords must match')])
+    confirm = PasswordField(validators=[InputRequired("Please enter your password again")])
+    submit = SubmitField()
+
+
 class NewLesson(FlaskForm):
     """Form to collect data to create new lesson log"""
     lesson_time = StringField(validators=[DataRequired()])
@@ -73,10 +85,33 @@ def validate_user(email, password):
     except:
         return None
 
+
 @app.teardown_appcontext
 def close_db(error):
     """ Remove the current SQLAlchemy Session """
     storage.close()
+
+#web site routes
+@app.route('/signup', methods=['GET','POST'], strict_slashes=False)
+def handle_signup():
+    """ Handle signing up new users """
+    signup = RegistrationForm()
+    if signup.validate_on_submit():
+        first_name = signup.first_name.data
+        last_name = signup.last_name.data
+        activity = signup.activity.data
+        email = signup.email.data
+        password = signup.password.data
+        user_details = {"first_name": first_name, "last_name": last_name,
+                        "activity": activity, "email": email,
+                        "password": password}
+        user = User(**user_details)
+        user.save()
+        session.permanent = True
+        session["user"] = user.id
+        return redirect(url_for("handle_students"))
+    else:
+        return render_template('signup.html', signup=signup)
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def handle_login():
@@ -101,11 +136,6 @@ def handle_students():
     """ Web page for all students taught by a user/tutor """
     form = NewStudent()
     form2 = ShowLessons()
-    if "user" in session:
-        user_id = session["user"]
-        user = storage.get(User, user_id)
-    else:
-        return redirect(url_for("handle_login"))
     if request.method == 'POST':
         if form.validate():
             name = form.name.data
@@ -121,6 +151,11 @@ def handle_students():
             student.save()
         return redirect(url_for("handle_students"))
     else:
+        if "user" in session:
+            user_id = session["user"]
+            user = storage.get(User, user_id)
+        else:
+            return redirect(url_for("handle_login"))
         students = user.students
         students = sorted(students, key=lambda k: k.first_name)
         return render_template('students.html',
@@ -247,7 +282,7 @@ def handle_logout():
     """Handle logging out a signed in user"""
     if "user" in session:
         session.pop('user', None)
-        return redirect(url_for('handle_home'))
+    return redirect(url_for('handle_login'))
 
 
 @app.route('/user/schedule', strict_slashes=False)
@@ -259,9 +294,7 @@ def handle_schedule():
         ss = user.schedule()
         if ss is not None:
             ss = sorted(ss, key=lambda s: s[0], reverse=True)
-            return render_template('calendar.html', ss=ss)
-        else:
-            return "<p> No lessons scheduled </p>"
+        return render_template('calendar.html', ss=ss)
     else:
         return redirect(url_for('handle_login'))
 

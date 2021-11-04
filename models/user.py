@@ -49,7 +49,10 @@ class User(BaseModel, Base):
             schedule = []
             for student in students:
                 lessons = student.lesson_logs
-                full_name = student.first_name + ' ' + student.last_name
+                if student.first_name and student.last_name:
+                    full_name = student.first_name + ' ' + student.last_name
+                else:
+                    full_name = student.first_name
                 for lesson in lessons:
                     if lesson.lesson_time:
                         schedule.append([lesson.lesson_time,

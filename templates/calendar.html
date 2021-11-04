@@ -13,30 +13,7 @@
       <h1 class = "header_title">Welcome Back</h1>
       <p class="header_copy"> Calendar Plan</p>
     </div>
-<!--
-    <div class="calendar_plan">
-      <div class="cl_plan">
-        <div class="cl_title">Days</div>
-        <div class="cl_copy">Days</div>
-        <div class="cl_add">
-          <i class="fas fa-plus"></i>
-        </div>
-      </div>
-    </div>
-    <div class="calendar_events">
-      <p class="ce_title">Lessons</p>
-      <ul class="list-group">
-	{% for s in ss %}
-	<li class="list-group-item">
-	  <div class="event_item">
-            <div class="ei_Dot"></div>
-            <div class="ei_Title">{{ key }} {{ value }}</div>
-	  </div>
-	</li>
-	{% endfor %}
-      </ul>
-    </div>
--->
+    {% if ss is not none %}
 <table class="table table-hover">
   <thead>
     <tr>
@@ -55,6 +32,9 @@
     {% endfor %}
   </tbody>
 </table>
+{% else %}
+<p> No lessons scheduled </p>
+{% endif %}
   </div>
 </div>
 

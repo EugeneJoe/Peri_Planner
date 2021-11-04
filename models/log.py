@@ -18,14 +18,15 @@ class LessonLog(BaseModel, Base):
         user_id (str): id of user who is managing the lesson log
         plan (str): Detailed description of what is to be covered in the
                            lesson
-        comments (str): Comments on how the lesson went and anything interesting
-                        you noticed about the student's technique/behaviour
+        comments (str): Comments on how the lesson went and any interesting
+                        thing you noticed about the student's technique
         homework(str): Any homework assigned, if any
     """
 
     if models.storage_t == 'db':
         __tablename__ = "lessonlogs"
-        student_id = Column(String(60), ForeignKey("students.id"), nullable=False)
+        student_id = Column(String(60), ForeignKey("students.id"),
+                            nullable=False)
         user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
         plan = Column(String(1024), nullable=True)
         comments = Column(String(1024), nullable=True)
@@ -47,8 +48,10 @@ class LessonLog(BaseModel, Base):
 
     def __str__(self):
         """Return a string representation of a lesson log"""
-        ss = super().__str__()
-        return ss + "{} {} {}".format(self.plan, self.comments, self.homework)
+        return "[{}] ({}) {} {} {} {} {}".format(self.__class__.__name__,
+                                                 self.id, self.lesson_time,
+                                                 self.location, self.plan,
+                                                 self.comments, self.homework)
 
     def to_dict(self):
         """Return a dict representation of a lesson log"""

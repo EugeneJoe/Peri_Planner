@@ -9,6 +9,7 @@ import models
 from models.base_model import BaseModel, Base
 from models.log import LessonLog
 
+
 class Student(BaseModel, Base):
     """
     This class defines a student through various attributes
@@ -39,7 +40,8 @@ class Student(BaseModel, Base):
     def __init__(self, *args, **kwargs):
         """Initialize a new student"""
         super().__init__(*args, **kwargs)
-        self.fullname = self.first_name + " " + self.last_name
+        if self.first_name and self.last_name:
+            self.fullname = self.first_name + " " + self.last_name
 
     if models.storage_t != "db":
         @property

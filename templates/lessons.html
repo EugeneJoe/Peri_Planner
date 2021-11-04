@@ -25,7 +25,7 @@
 	<td>{{ form.plan(placeholder="What you plan to cover in the lesson") }}</td>
 	<td>{{ form.comments(placeholder="Comments on how the lesson went") }}</td>
 	<td>{{ form.homework(placeholder="Any homework assigned") }}</td>
-	<td>{{ form.new_lesson() }} {{ form.std_id(value=student.id) }}</td>
+	<td>{{ form.new_lesson(value="New log") }} {{ form.std_id(value=student.id) }}</td>
       </form>
     </tr>
     {% for lesson in lessons %}
