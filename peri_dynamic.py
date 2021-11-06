@@ -4,7 +4,8 @@ from os import environ
 from datetime import timedelta, datetime
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, HiddenField, DateTimeField, PasswordField
+from wtforms import StringField, SubmitField, TextAreaField, HiddenField
+from wtforms import DateTimeField, PasswordField
 from wtforms.validators import DataRequired, InputRequired, EqualTo
 
 from models import storage
@@ -15,7 +16,8 @@ from models.log import LessonLog
 
 
 app = Flask(__name__)
-app.secret_key = "" #kept hidden
+# kept hidden
+app.secret_key = ""
 app.permanent_session_lifetime = timedelta(minutes=20)
 time2 = "%Y-%m-%dT%H:%M:%S.%f"
 # app.jinja_env.trim_blocks = True
@@ -28,10 +30,14 @@ class RegistrationForm(FlaskForm):
     first_name = StringField(validators=[DataRequired()])
     last_name = StringField(validators=[DataRequired()])
     activity = StringField(validators=[DataRequired()])
-    email = StringField(validators=[InputRequired("Please enter your email address")])
-    password = PasswordField(validators=[InputRequired("Please enter your password"),
-                                         EqualTo('confirm', message='Passwords must match')])
-    confirm = PasswordField(validators=[InputRequired("Please enter your password again")])
+    email_str = "Please enter your email address"
+    email = StringField(validators=[InputRequired(email_str)])
+    pass_str = "Please enter your password"
+    eql_str = "Passwords must match"
+    password = PasswordField(validators=[InputRequired(pass_str),
+                                         EqualTo('confirm', message=eql_str)])
+    confirm_str = "Please enter your password again"
+    confirm = PasswordField(validators=[InputRequired(confirm_str)])
     submit = SubmitField()
 
 
@@ -88,8 +94,9 @@ def close_db(error):
     """ Remove the current SQLAlchemy Session """
     storage.close()
 
+
 #web site routes
-@app.route('/signup', methods=['GET','POST'], strict_slashes=False)
+@app.route('/signup', methods=['GET', 'POST'], strict_slashes=False)
 def handle_signup():
     """ Handle signing up new users """
     signup = RegistrationForm()
@@ -110,6 +117,7 @@ def handle_signup():
     else:
         return render_template('signup.html', signup=signup)
 
+
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def handle_login():
     """ Handle login for existing users """
@@ -129,6 +137,7 @@ def handle_login():
         else:
             print("No match found")
             return redirect(url_for("handle_login"))
+
 
 @app.route('/user/students', methods=['GET', 'POST'], strict_slashes=False)
 def handle_students():
@@ -159,6 +168,7 @@ def handle_students():
         return render_template('students.html',
                                students=students, form=form, form2=form2)
 
+
 @app.route('/user/student/<student_id>/lessons', methods=['GET', 'POST'],
            strict_slashes=False)
 def handle_lesson_logs(student_id):
@@ -188,6 +198,7 @@ def handle_lesson_logs(student_id):
                                    updateform=updateform)
         except:
             return redirect(url_for("handle_students"))
+
 
 @app.route('/user/student/lessons/new', methods=['GET', 'POST'],
            strict_slashes=False)
@@ -224,6 +235,7 @@ def handle_new_lessons():
         else:
             return redirect(url_for("handle_login"))
     return redirect(url_for("handle_students"))
+
 
 @app.route('/user/student/lessons/<lesson_id>/update', methods=['POST', 'GET'],
            strict_slashes=False)
