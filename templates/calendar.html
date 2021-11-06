@@ -27,7 +27,7 @@
     <tr>
       <td>{{ s[0] }}</td>
       <td>{{ s[1] }}</td>
-      <td><a class="btn btn-primary" href="/user/student/{{ s[2] }}/lessons" role="button">Lesson Logs</a></td>
+      <td><a class="btn btn-primary" href="{{ url_for('handle_lesson_logs', student_id=s[2]) }}" role="button">Lesson Logs</a></td>
     </tr>
     {% endfor %}
   </tbody>

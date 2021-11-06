@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Peri Planner | Update Lesson Logs {% endblock %}
 {% block content %}
-<form action="/user/student/lessons/{{lesson_id}}/update" method=post id="update_lesson_log">
+<form action="{{ url_for('handle_update_lessons', lesson_id=lesson_id) }}" method=post id="update_lesson_log">
   {{ updateform.csrf_token() }}
   {{ updateform.lesson_id(value=lesson_id) }}
 <div class="form-group">
