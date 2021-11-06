@@ -72,14 +72,11 @@ class ShowLessons(FlaskForm):
 
 def validate_user(email, password):
     """ Check given credentials against stored data to log in a user """
-    print("Validating")
     users = storage.all(User).values()
     try:
         for u in users:
             if u.email == email:
-                print(u.email)
                 if u.password == password:
-                    print("password matched")
                     return u
         return None
     except:
@@ -123,12 +120,14 @@ def handle_login():
     else:
         email = request.form["email"]
         psswrd = request.form["pwd"]
+        print(storage.__class__.__name__)
         logged_in = validate_user(email, psswrd)
         if logged_in is not None:
             session.permanent = True
             session["user"] = logged_in.id
             return redirect(url_for("handle_students"))
         else:
+            print("No match found")
             return redirect(url_for("handle_login"))
 
 @app.route('/user/students', methods=['GET', 'POST'], strict_slashes=False)
@@ -136,10 +135,14 @@ def handle_students():
     """ Web page for all students taught by a user/tutor """
     form = NewStudent()
     form2 = ShowLessons()
+    if "user" in session:
+        user_id = session["user"]
+        user = storage.get(User, user_id)
+    else:
+        return redirect(url_for("handle_login"))
     if request.method == 'POST':
         if form.validate():
             name = form.name.data
-            print(name)
             form.name.data = ''
             first_name = name.split(' ')[0]
             last_name = name.split(' ')[-1]
@@ -151,11 +154,6 @@ def handle_students():
             student.save()
         return redirect(url_for("handle_students"))
     else:
-        if "user" in session:
-            user_id = session["user"]
-            user = storage.get(User, user_id)
-        else:
-            return redirect(url_for("handle_login"))
         students = user.students
         students = sorted(students, key=lambda k: k.first_name)
         return render_template('students.html',
@@ -259,6 +257,8 @@ def handle_update_lessons(lesson_id):
         student = storage.get(Student, lesson.student_id)
         lessons = student.lesson_logs
         lessons = sorted(lessons, key=lambda k: k.created_at)
+        form.lesson_time.data = ''
+        form.location.data = ''
         form.plan.data = ''
         form.comments.data = ''
         form.homework.data = ''
@@ -301,4 +301,4 @@ def handle_schedule():
 
 if __name__ == "__main__":
     """ Main Function """
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=5001)
