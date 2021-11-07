@@ -60,7 +60,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Author
-👤 **Fguene Muthui**
+Eugene Muthui
 - LinkedIn: [@Eugene Joe Muthui] (https://www.linkedin.com/in/eugene-joe-muthui-954b633a)
 - Twitter: [@MuthuiJoe] (https://twitter.com/MuthuiJoe)
 - Github: [@EugeneJoe] (https://github.com/EugeneJoe)
