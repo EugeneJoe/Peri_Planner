@@ -24,15 +24,15 @@ To run it on your local machine:
 2. Install the required libraries in the requirements.txt file
 3. Run the setup_mysql_dev.sql to setup the required database as follows:
 
-'''
+```
 cat setup_mysql_dev.sql | mysql -uroot -p
-'''
+```
 
 4. Start the flask app, passing the required environment variables as follows:
 
-'''python
+```python
 PERI_MYSQL_USER=peri_dev PERI_MYSQL_PWD=peri_dev_pwd PERI_MYSQL_HOST=localhost PERI_MYSQL_DB=peri_dev_db PERI_TYPE_STORAGE=db ./peri_dynamic.py
-'''
+```
 
 You can now access the web app from your browser on '''http://127.0.0.1:5001'''
 The project can also be deployed using Nginx and Gunicorn
@@ -51,8 +51,8 @@ Peri Planner App enables its users to create an account and log in from where th
 5. View you schedule depending on the scheduled lessons. This only works for lesson logs whose lesson time field has been filled.
 
 ## Screenshots
-![students page](https://github.com/[EugeneJoe]/[EugeneJoe.github.io]/blob/[master]/students.png?raw=true)
-![lessons page](https://github.com/[EugeneJoe]/[EugeneJoe.github.io]/blob/[master]/lessons.png?raw=true)
+![students page](https://imgur.com/UcNEbg1)
+![lessons page](https://imgur.com/aJoNFyk)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -60,7 +60,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## Author
-👤 **Fugene Muthui**
+👤 **FEgene Muthui**
 - LinkedIn: [@Eugene Joe Muthui] (https://www.linkedin.com/in/eugene-joe-muthui-954b633a)
 - Twitter: [@MuthuiJoe] (https://twitter.com/MuthuiJoe)
 - Github: [@EugeneJoe] (https://github.com/EugeneJoe)
