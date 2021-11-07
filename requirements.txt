@@ -1,0 +1,4 @@
+sqlalchemy==1.2.5
+flask==0.10.1
+flask_wtf==0.14.3
+MySQLdb==1.3.10
