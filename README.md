@@ -61,9 +61,9 @@ Please make sure to update tests as appropriate.
 
 ## Author
 Eugene Muthui
-- LinkedIn: [@Eugene Joe Muthui] (https://www.linkedin.com/in/eugene-joe-muthui-954b633a)
-- Twitter: [@MuthuiJoe] (https://twitter.com/MuthuiJoe)
-- Github: [@EugeneJoe] (https://github.com/EugeneJoe)
+- LinkedIn: [@Eugene Joe Muthui](https://www.linkedin.com/in/eugene-joe-muthui-954b633a)
+- Twitter: [MuthuiJoe](https://twitter.com/MuthuiJoe)
+- Github: [@EugeneJoe](https://github.com/EugeneJoe)
 
 ## Licensing
 MIT License
