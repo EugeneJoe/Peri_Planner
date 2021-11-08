@@ -54,12 +54,12 @@ Peri Planner App enables its users to create an account and log in from where th
 ### Students Display Page
 
 <p align="center">
-   <img align="center" src="https://imgur.com/UcNEbg1" alt="Students Page" />
+   <img align="center" src="https://github.com/EugeneJoe/EugeneJoe.github.io/blob/9793eb30b6d801b99608afab04712c568f3e393b/images/students.png?raw=true" alt="Students Page" />
 </p>
 
 ### Lessons Display Page
 <p align="center">
-   <img align="center" src="https://imgur.com/aJoNFyk" alt="Lessons Page" />
+   <img align="center" src="https://github.com/EugeneJoe/EugeneJoe.github.io/blob/9793eb30b6d801b99608afab04712c568f3e393b/images/lessons.png?raw=true" alt="Lessons Page" />
 </p>
 
 ## Contributing
