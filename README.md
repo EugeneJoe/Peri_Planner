@@ -51,8 +51,16 @@ Peri Planner App enables its users to create an account and log in from where th
 5. View you schedule depending on the scheduled lessons. This only works for lesson logs whose lesson time field has been filled.
 
 ## Screenshots
-![students page](https://imgur.com/UcNEbg1)
-![lessons page](https://imgur.com/aJoNFyk)
+### Students Display Page
+
+<p align="center">
+   <img align="center" src="https://imgur.com/UcNEbg1" alt="Students Page" />
+</p>
+
+### Lessons Display Page
+<p align="center">
+   <img align="center" src="https://imgur.com/aJoNFyk" alt="Lessons Page" />
+</p>
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
