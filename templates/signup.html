@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container">
-    <form action="/signup" method=post id="update_lesson_log">
+    <form action="{{ url_for('handle_signup') }}" method=post id="update_lesson_log">
       {{ signup.csrf_token() }}
       <div class="form-group">
 	{{ signup.first_name(class_="form-control", placeholder="Enter your first name") }}
