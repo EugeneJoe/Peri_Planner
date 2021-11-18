@@ -1,1 +1,0 @@
-PERI_MYSQL_USER=peri_dev PERI_MYSQL_PWD=peri_dev_pwd PERI_MYSQL_HOST=localhost PERI_MYSQL_DB=peri_dev_db PERI_TYPE_STORAGE=db ./test_data.py
