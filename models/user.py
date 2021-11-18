@@ -80,6 +80,6 @@ class User(BaseModel, Base):
             """Return the calendar for this user"""
             from models import storage
             calendars = storage.all("Calendar")
-            for v in calendars.values():
-                if v.user_id == self.id:
-                    return v
+            for cal in calendars.values():
+                if cal.user_id == self.id:
+                    return cal

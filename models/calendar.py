@@ -105,16 +105,16 @@ class Calendar(BaseModel, Base):
         else:
             lessons = self.lessons
         if len(lessons) > 0:
-            ss = {}
+            schedule = {}
             for k, v in lessons.items():
                 student = models.storage.get("Student", v[0])
                 lesson_log = models.storage.get("LessonLog", v[1])
                 s = "[{}]: {} {}\t{}".format(k, student.first_name,
                                              student.last_name, str(lesson_log))
                 fullname = student.first_name + " " + student.last_name
-                ss[k] = [fullname, lesson_log]
-                print(s)
-            return ss
+                schedule[k] = [fullname, lesson_log]
+                #print(s)
+            return schedule
 
     def to_dict(self):
         """Returns a dictionary representation of a calendar object"""
