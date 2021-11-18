@@ -51,6 +51,7 @@ Peri Planner App enables its users to create an account and log in from where th
 5. View you schedule depending on the scheduled lessons. This only works for lesson logs whose lesson time field has been filled.
 
 You can check out the live project [here](https://periplanner.joebnb.tech/login)
+You can also read an article wrote about my experience building the Peri Planner App [here](https://medium.com/@EugeneJoe/the-peri-planner-app-dev-experience-7aac98ce40c4)
 
 ## Screenshots
 ### Students Display Page
