@@ -50,6 +50,8 @@ Peri Planner App enables its users to create an account and log in from where th
 4. Add new lesson logs for each student. When adding a new lesson log, the lesson plan field is required and cannot be left empty. Other fields can be left empty as this is information that may change before or after the lesson  has occured.
 5. View you schedule depending on the scheduled lessons. This only works for lesson logs whose lesson time field has been filled.
 
+You can check out the live project [here](https://periplanner.joebnb.tech/login)
+
 ## Screenshots
 ### Students Display Page
 
